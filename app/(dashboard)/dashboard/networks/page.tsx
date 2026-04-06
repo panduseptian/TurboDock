@@ -223,7 +223,7 @@ export default function NetworksPage() {
                       </TableCell>
                       <TableCell>
                         <Badge
-                          variant={net.Internal ? "default" : "secondary"}
+                          variant={net.Internal ? "warning" : "default"}
                           className="label-sm"
                         >
                           {net.Internal ? "Yes" : "No"}

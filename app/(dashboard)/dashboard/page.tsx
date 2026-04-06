@@ -252,9 +252,7 @@ export default function DashboardPage() {
         </div>
         {info && (
           <div className="flex items-center gap-3">
-            <Badge status="running" dot>
-              Connected
-            </Badge>
+            <Badge status="running">Connected</Badge>
             <span className="text-sm text-on-surface-variant">
               v{info.ServerVersion}
             </span>
@@ -330,7 +328,6 @@ export default function DashboardPage() {
                       ? "running"
                       : "stopped"
                   }
-                  dot
                 >
                   {info.Swarm.LocalNodeState === "active"
                     ? "Active"

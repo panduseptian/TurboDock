@@ -252,13 +252,9 @@ export default function ContainerStatsPage() {
           </Link>
 
           {connected ? (
-            <Badge status="running" dot>
-              Connected
-            </Badge>
+            <Badge status="running">Connected</Badge>
           ) : error ? (
-            <Badge status="stopped" dot>
-              Disconnected
-            </Badge>
+            <Badge status="stopped">Disconnected</Badge>
           ) : (
             <div className="inline-flex items-center gap-2 rounded-full bg-surface-container-high px-3 py-1.5 label-sm text-on-surface">
               <span className="h-3 w-3 animate-spin rounded-full border-2 border-primary border-t-transparent" />

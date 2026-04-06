@@ -352,9 +352,7 @@ export default function ContainersPage() {
                       {c.Image}
                     </TableCell>
                     <TableCell>
-                      <Badge status={statusToBadge(c.State)} dot>
-                        {c.State}
-                      </Badge>
+                      <Badge status={statusToBadge(c.State)}>{c.State}</Badge>
                     </TableCell>
                     <TableCell className="hidden lg:table-cell text-on-surface-variant text-sm">
                       {c.Status}

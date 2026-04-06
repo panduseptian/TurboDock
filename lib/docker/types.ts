@@ -289,8 +289,18 @@ export interface SwarmService {
   Spec: {
     Name: string;
     Labels?: Record<string, string>;
-    TaskTemplate: Record<string, unknown>;
-    Mode: Record<string, unknown>;
+    TaskTemplate: {
+      ContainerSpec?: {
+        Image?: string;
+        [key: string]: unknown;
+      };
+      [key: string]: unknown;
+    };
+    Mode: {
+      Replicated?: { Replicas?: number };
+      Global?: Record<string, unknown>;
+      [key: string]: unknown;
+    };
     UpdateConfig?: Record<string, unknown>;
     EndpointSpec?: Record<string, unknown>;
   };

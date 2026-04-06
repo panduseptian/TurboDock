@@ -5,9 +5,7 @@ import {
   toDockerErrorResponse,
   getClientIpAddress,
 } from "@/app/api/docker/_shared";
-import { db } from "@/lib/db";
-import { auditLogs } from "@/lib/db/schema";
-import { nanoid } from "nanoid";
+import { logAudit } from "@/lib/audit";
 
 type RouteParams = { params: Promise<{ endpointId: string; nodeId: string }> };
 
@@ -53,17 +51,19 @@ export async function POST(
       );
     }
 
-    await resolved.docker.updateNode(nodeId, body.version, body.spec);
+    await resolved.docker.updateNode(
+      nodeId,
+      body.version,
+      body.spec as import("@/lib/docker/types").NodeUpdateSpec,
+    );
 
-    await db.insert(auditLogs).values({
-      id: nanoid(),
+    await logAudit({
       userId: resolved.auth.id,
       action: "node.update",
-      resourceType: "node",
-      resourceId: nodeId,
+      resource: `node:${nodeId}`,
       endpointId,
       ipAddress: getClientIpAddress(request),
-      details: JSON.stringify(body.spec),
+      details: body.spec,
     });
 
     return new NextResponse(null, { status: 204 });
@@ -84,12 +84,10 @@ export async function DELETE(
     const force = request.nextUrl.searchParams.get("force") === "true";
     await resolved.docker.deleteNode(nodeId, force);
 
-    await db.insert(auditLogs).values({
-      id: nanoid(),
+    await logAudit({
       userId: resolved.auth.id,
       action: "node.remove",
-      resourceType: "node",
-      resourceId: nodeId,
+      resource: `node:${nodeId}`,
       endpointId,
       ipAddress: getClientIpAddress(request),
     });

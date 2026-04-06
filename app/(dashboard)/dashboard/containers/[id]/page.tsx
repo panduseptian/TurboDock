@@ -325,7 +325,7 @@ export default function ContainerDetailPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <h1 className="headline-md text-on-surface">{name}</h1>
-          <Badge status={statusBadge(container.State.Status)} dot>
+          <Badge status={statusBadge(container.State.Status)}>
             {container.State.Status.charAt(0).toUpperCase() +
               container.State.Status.slice(1)}
           </Badge>
@@ -440,7 +440,7 @@ export default function ContainerDetailPage() {
             <div className="space-y-3">
               <div className="flex items-center justify-between py-1 gap-4">
                 <span className="label-sm text-on-surface-variant">Status</span>
-                <Badge status={statusBadge(container.State.Status)} dot>
+                <Badge status={statusBadge(container.State.Status)}>
                   {container.State.Status.charAt(0).toUpperCase() +
                     container.State.Status.slice(1)}
                 </Badge>

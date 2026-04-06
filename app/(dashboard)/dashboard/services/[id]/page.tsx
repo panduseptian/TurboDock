@@ -259,7 +259,7 @@ export default function ServiceDetailPage() {
                           <Badge
                             status={
                               isRunning
-                                ? "success"
+                                ? "running"
                                 : isFailed
                                   ? "error"
                                   : "default"
